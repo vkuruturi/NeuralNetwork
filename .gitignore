@@ -1,0 +1,6 @@
+*.exe
+*.o
+*~
+*.sublime-project
+.DS_Store
+
