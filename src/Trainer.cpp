@@ -1,8 +1,13 @@
 #include <vector>
 #include "Trainer.h"
 #include <string>
+#include <fstream>
 #include <iostream>
 #include <sstream>
+
+	std::vector<std::string> v;
+	std::vector<double> input_values;
+	std::vector<double> output_values;
 
 void Trainer::import_neural_net(std::ifstream *in)
 {
@@ -20,20 +25,31 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 {
 	int current_epochs = 0;
 	std::string s;
-	std::vector<double> input_values;
-	std::vector<double> output_values;
-	std::vector<std::string> v;
-	while(std::getline(*training_file,s))
-		v.push_back(s);
 
+	int i = 0;
+	std::cout << "initial size: " << v.size();
+    while(getline(*training_file,s))
+    {
+        v.push_back(s);
+        //std::cout << v[i] << std::endl;
+        i++;
+    }
+
+    for(int i = 0; i < v.size(); i++)
+    {
+    //	std::cout << v[i] << std::endl;
+    }
+epochs=1;
+	std::cout << "example count: " << v.size() << std::endl;
 	while (current_epochs < epochs)
 	{
-		for(std::vector<std::string>::const_iterator it = v.begin(); it != v.end(); it++)
+		for(int i = 0; i < v.size(); i++)
 		{
+			std::cout << v[i] << std::endl;
 			int count = 0;
-			std::stringstream ss(*it);
+			std::stringstream ss(v[i]);
 			double d;
-
+			std::cout << "COUNT: " << count << std::endl;
 			while (ss >> d)
 			{
 				if (count < inputs)
@@ -46,9 +62,9 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 					count++;
 				}
 			}
-
-			net->feed_forward(&input_values);
-			back_prop(&output_values);
+			std::cout << input_values.size() << std::endl;
+			net->feed_forward(input_values);
+			//back_prop(&output_values); 
 		}
 		current_epochs++;
 	}

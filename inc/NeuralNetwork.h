@@ -17,7 +17,7 @@ private:
 
 	void load_neural_net(std::ifstream*);
 
-	void feed_forward(std::vector<double>*);
+	void feed_forward(const std::vector<double> &);
 
 	void save_weights(std::ofstream*);
 

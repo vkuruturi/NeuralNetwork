@@ -53,7 +53,7 @@ void Tester::test_network(std::ifstream *in)
 			}
 		}
 
-		net->feed_forward(&input);
+		net->feed_forward(input);
 		compare_outputs(&expected_output);
 	}
 	calculate_metrics();

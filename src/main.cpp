@@ -35,11 +35,13 @@ void train(void)
 {
 	Trainer t;
 	int i;
+	double d;
 	std::string s;
 	std::ifstream net_file, training_file;
 	std::ofstream outfile;
 	std::cout << "Specify input file to load the initial neural network from: ";
-	std::cin >> s;
+	//std::cin >> s;
+	s = "test/WDBC/net_init.txt";
 	net_file.open(s.c_str());
     
     while (!net_file.good())
@@ -51,15 +53,17 @@ void train(void)
     t.import_neural_net(&net_file);
 
 	std::cout << "Enter the number of epochs training should go on for: ";
-	std::cin >> i;
+	//std::cin >> i;
+	i = 100;
 	t.set_epochs(i);
 	std::cout << "Enter the learning rate: ";
-	std::cin >> i;
-	t.set_learning_rate(i);
+	//std::cin >> d;
+	d = 0.1;
+	t.set_learning_rate(d);
 
 	std::cout << "Specify the input file for training the neural network: ";
-	std::cin >> s;
-
+	//std::cin >> s;
+	s = "test/WDBC/train.txt";
 	training_file.open(s.c_str());
     
     while (!training_file.good())
@@ -82,7 +86,8 @@ void train(void)
     std::cout << "Finished training!" << std::endl << std::endl;
 
     std::cout << "Enter output file name to save the neural network into: ";
-    std::cin >> s;
+    //std::cin >> s;
+    s = "net_output.txt";
     outfile.open(s.c_str());
     while(!outfile.good())
     {
@@ -99,7 +104,7 @@ void train(void)
 
 void test()
 {
-	
+
 }
 
 int main(int argc, char** argv)

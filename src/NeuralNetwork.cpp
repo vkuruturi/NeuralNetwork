@@ -53,15 +53,14 @@ void NeuralNetwork::load_neural_net(std::ifstream *in){
 	hidden_neurons[0] = -1;
 }
 
-void NeuralNetwork::feed_forward(std::vector<double>* input){
-
+void NeuralNetwork::feed_forward(const std::vector<double> &input){
 	// error check: match input size to size of input neurons
-	if (input_neurons.size() != input->size() +1)
+	if (input_neurons.size() != input.size() +1)
 	{
-		std::cerr << "NeuralNetwork::feed_forward: input size does not match! Input neuron count (w/o bias): "  << input_neuron_count << " input vector size: " <<input->size() << ". Exiting..." << std::endl;
+		std::cerr << "NeuralNetwork::feed_forward: input size does not match! Input neuron count (w/o bias): "  << input_neuron_count << " input vector size: " <<input.size() << ". Exiting..." << std::endl;
 		exit(1);
 	}
-
+/*
 	// fill all neuron values with 0
 	std::fill(input_neurons.begin(),input_neurons.end(),0);
 	std::fill(hidden_neurons.begin(), hidden_neurons.end(),0);
@@ -73,11 +72,12 @@ void NeuralNetwork::feed_forward(std::vector<double>* input){
 
 	// fill in input neurons
 	for (int i = 1; i <input_neurons.size(); ++i){
-		input_neurons[i] = input->at(i);
+		input_neurons[i] = input[i];
 	}
 
 	update_activations(input_neurons,weights_in2hid,hidden_neurons);
-	update_activations(hidden_neurons,weights_hid2out,output_neurons);
+	update_activations(hidden_neurons,weights_hid2out,output_neurons);*/
+	return;
 }
 
 void NeuralNetwork::update_activations(std::vector<double> &previous, std::vector<std::vector<double>> &weights, std::vector<double> &next){
