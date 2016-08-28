@@ -1,0 +1,649 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pieces",
+				"pieces_taken"
+			],
+			[
+				"boa",
+				"game_board"
+			],
+			[
+				"base",
+				"base_weight"
+			],
+			[
+				"king",
+				"king_weight"
+			],
+			[
+				"alpha",
+				"alpha_beta"
+			],
+			[
+				"curr",
+				"curr_player"
+			],
+			[
+				"max",
+				"hit_max_depth"
+			],
+			[
+				"current",
+				"current_game"
+			],
+			[
+				"red",
+				"red_pieces"
+			],
+			[
+				"get",
+				"get_game_board"
+			],
+			[
+				"possi",
+				"possible_jumps"
+			],
+			[
+				"pie",
+				"contains_piece"
+			],
+			[
+				"is",
+				"is_king"
+			],
+			[
+				"check",
+				"check_jump"
+			],
+			[
+				"oirg",
+				"orig_y"
+			],
+			[
+				"orig",
+				"orig_x"
+			],
+			[
+				"game",
+				"current_game"
+			],
+			[
+				"save",
+				"savefile"
+			],
+			[
+				"board",
+				"board_array"
+			],
+			[
+				"curren",
+				"current_piece"
+			],
+			[
+				"piece",
+				"piece_king"
+			],
+			[
+				"lo",
+				"loc_x"
+			],
+			[
+				"pla",
+				"player_1"
+			],
+			[
+				"l",
+				"loc_x"
+			],
+			[
+				"loc",
+				"loc_x"
+			],
+			[
+				"su",
+				"square_full"
+			],
+			[
+				"cont",
+				"contact-form"
+			],
+			[
+				"temp_",
+				"temp_sum0"
+			],
+			[
+				"adder",
+				"adder_4bit"
+			],
+			[
+				"temp",
+				"temp_sum0"
+			],
+			[
+				"a",
+				"adder_4bit"
+			],
+			[
+				"ad",
+				"adder_4bit_1"
+			],
+			[
+				"carr",
+				"carry_cin_ab"
+			],
+			[
+				"and",
+				"and_cin_xor_ab"
+			],
+			[
+				"inc",
+				"include"
+			],
+			[
+				"in",
+				"in_B"
+			],
+			[
+				"ca",
+				"carry_out"
+			],
+			[
+				"W",
+				"WIDTH-1"
+			],
+			[
+				"carry",
+				"carry_in"
+			],
+			[
+				"cin",
+				"carry_in"
+			],
+			[
+				"close",
+				"close_program"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "inc/NeuralNetwork.h",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/Makefile/Make.sublime-build",
+					""
+				],
+				[
+					"Packages/Makefile/Make.sublime-build",
+					"Clean"
+				]
+			],
+			[
+				"Packages/Makefile/Make.sublime-build",
+				"Clean"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"last_filter": "install",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"package control:li",
+				"Package Control: List Packages"
+			],
+			[
+				"package control ins",
+				"Package Control: Install Package"
+			],
+			[
+				"package control li",
+				"Package Control: List Unmanaged Packages"
+			],
+			[
+				"packa",
+				"Package Control: Add Channel"
+			],
+			[
+				"Package Control: pack",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 83.0,
+		"history":
+		[
+			"dir",
+			"ls",
+			"make"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/vkuruturi/Documents/Checkers-AI/src/main.cpp",
+		"/Users/vkuruturi/Documents/Checkers-AI/src/game.cpp",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/game.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/board.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/src/board.cpp",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/main.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/test/fail.txt",
+		"/Users/vkuruturi/Documents/Checkers-AI/test.cpp",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/defs.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/Makefile",
+		"/Users/vkuruturi/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/vkuruturi/Documents/Checkers-AI/Checkers-AI.sublime-project",
+		"/Users/vkuruturi/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/move.h",
+		"/usr/include/time.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/test/sampleCheckers1.txt",
+		"/Users/vkuruturi/Documents/Checkers-AI/src/move.cpp",
+		"/Users/vkuruturi/.bashrc",
+		"/Users/vkuruturi/Documents/Checkers-AI/.gitignore",
+		"/Users/vkuruturi/Documents/Checkers-AI/inc/colors.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/src/board.h",
+		"/Users/vkuruturi/Documents/Checkers-AI/src/colors.h",
+		"/Users/vkuruturi/.vim/colors/monokai.vim",
+		"/Users/vkuruturi/Documents/index.jsp",
+		"/Users/vkuruturi/Documents/ECE361/Chapter 12",
+		"/Users/vkuruturi/Documents/ECE361/Chapter 8",
+		"/Users/vkuruturi/Documents/ECE361/2-24-16_notes.txt",
+		"/Users/vkuruturi/Documents/ECE361/JDBC notes",
+		"/Users/vkuruturi/Documents/ECE361/3-10-16_notes.txt",
+		"/Users/vkuruturi/Documents/ECE447/Project/definitions.v",
+		"/Users/vkuruturi/Documents/ECE447/Project/DSPDecode.v",
+		"/Users/vkuruturi/Downloads/sram.v",
+		"/Users/vkuruturi/Documents/ECE361/1-27-16_notes.txt",
+		"/Users/vkuruturi/Documents/ECE447/lab 3/stacktrace.txt",
+		"/Users/vkuruturi/Documents/ECE447/lab 3/error.log",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/index.html",
+		"/Users/vkuruturi/Documents/ECE361/1-20-16_notes.txt",
+		"/Users/vkuruturi/Documents/ECE447/Lab 1 Submissions/Verilog QandA.txt",
+		"/Users/vkuruturi/Documents/blue-log-condensed.log",
+		"/Users/vkuruturi/Documents/BLUE-20160202-0258.log",
+		"/Users/vkuruturi/Documents/blue-log.txt",
+		"/Users/vkuruturi/Documents/numpy_scipy_test.py",
+		"/Users/vkuruturi/Downloads/counter.v",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/ADDS_addusers.ps1",
+		"/Users/vkuruturi/Downloads/Squadfree/index.html",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/css/style.css",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/css/bootstrap.css",
+		"/Users/vkuruturi/Documents/ECE361/Hello_World/HelloWorld.java",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/js/formspree_ajax.js",
+		"/Users/vkuruturi/Documents/ECE361/1-20-16",
+		"/Users/vkuruturi/Documents/Website/vkuruturi.github.io/js/custom.js",
+		"/Users/vkuruturi/Documents/Verilog/16bit_ALU/adder_16bit.v",
+		"/Users/vkuruturi/Documents/Resume/Cover Letters/cover letter intel.txt",
+		"/Users/vkuruturi/Documents/Verilog/16bit_ALU/shifter_16bit.v",
+		"/Users/vkuruturi/Documents/Verilog/16bit_ALU/adder_4bit.v",
+		"/Users/vkuruturi/Documents/Resume/Cover Letters/intel undergrad work exp",
+		"/Users/vkuruturi/Documents/blue/stella    .",
+		"/Users/vkuruturi/shifter.circ",
+		"/Users/vkuruturi/Documents/Verilog/16bit_ALU/mux.v",
+		"/Users/vkuruturi/Documents/Verilog/32bit_ALU/ALU.v",
+		"/Users/vkuruturi/Documents/Verilog/32bit_ALU/alu_test.v",
+		"/Users/vkuruturi/Documents/Verilog/Counter/counter.v",
+		"/Users/vkuruturi/Documents/Verilog/Counter/counter_tb.v",
+		"/Users/vkuruturi/Documents/yosys/yosys/Makefile",
+		"/Users/vkuruturi/.yosys_show.dot",
+		"/Users/vkuruturi/.bash_profile",
+		"/Users/vkuruturi/Documents/Verilog/32bit_ALU/show",
+		"/Users/vkuruturi/Documents/Verilog/32bit_ALU/alu_test.c",
+		"/Users/vkuruturi/Documents/Verilog/Counter/counter_tb",
+		"/Users/vkuruturi/Documents/Verilog/32bit_ALU/full_adder_32bit.v",
+		"/Users/vkuruturi/Library/Application Support/Google/Chrome/Local State",
+		"/Users/vkuruturi/Documents/Verilog/Hello_World/hello.v",
+		"/Users/vkuruturi/Documents/Verilog/Counter/file_list.txt",
+		"/private/etc/hosts",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/dsa2 notes 12-9",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/dsa2 notes 11-2",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/dsa2 notes 11-25",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/sample_in.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/graph.cpp",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/graph.h",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/Makefile",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-4/in.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/hash.cpp",
+		"/Users/vkuruturi/Documents/Assingment-4/Assingment-4/in",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/ShortestPath.cpp",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 8/Makefile",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-3/Djikstra.cpp",
+		"/Users/vkuruturi/Desktop/graph/Makefile",
+		"/Users/vkuruturi/Documents/MATLAB/Comm-Theory/Enginetest2.m",
+		"/Users/vkuruturi/Desktop/graph/graph.h",
+		"/Users/vkuruturi/Desktop/graph/heap.h",
+		"/Users/vkuruturi/Desktop/graph/dijkstra.cpp",
+		"/Users/vkuruturi/Documents/MATLAB/Comm-Theory/Enginetest2.m~",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/gen.sh",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/heap.cpp",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/Makefile",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/hash.cpp",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/heap.h",
+		"/Users/vkuruturi/Google Drive/Cooper/HZ/operatingSystems/os/8_system_calls/src/main.c",
+		"/Users/vkuruturi/ls",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/numbers2.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/outfile.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/numbers.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-2/numb",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/gen.sh",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-1/hash.cpp",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-1/spellcheck.cpp",
+		"/Users/vkuruturi/Google Drive/Cooper/HZ/operatingSystems/os/3_shell/os3.c",
+		"/Users/vkuruturi/Library/Containers/com.apple.mail/Data/Library/Mail Downloads/46B242B4-121B-4433-803E-35C846386869/main.cpp",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/gen.sh",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/test.sh",
+		"/Users/vkuruturi/Downloads/copycat.txt",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/.gitignore",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/copycat.c",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/time.txt",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/.gitignore",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/test.txt",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/in3.txt",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/in2.txt",
+		"/Users/vkuruturi/Applications/.localized",
+		"/Users/vkuruturi/Documents/ECE165/DSA-2/Assignment-1/Makefile",
+		"/Users/vkuruturi/Documents/ECE357/Operating-Systems/Problem Set 1/in1"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"",
+			"*.c",
+			"/Users/vkuruturi/Documents/Checkers-AI/*/*.c",
+			"*.c,/Users/vkuruturi/Documents/Checkers-AI",
+			"*.c",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"check_ju",
+			"new ",
+			"new_move = &(new move)",
+			"x: ",
+			"std::cout",
+			"print",
+			"->",
+			"make_mo",
+			"cerr",
+			"possible_jumps",
+			"std::cout <<",
+			"<< this",
+			"copy_boa",
+			"check_jump(",
+			"check_jump",
+			"check_ump",
+			"copy_board",
+			"board(",
+			"cout",
+			"brd",
+			"brd*",
+			"brd",
+			"current_p",
+			"cout",
+			"cerr",
+			"in possible",
+			"std::cout",
+			"jump_found",
+			"more_jumps_exist",
+			"more_jumps",
+			"index",
+			"no ",
+			"no",
+			"movelist size",
+			"push_",
+			"colors.h",
+			"copy",
+			"memcpy",
+			"BLK",
+			"carous",
+			"form",
+			".jpg",
+			"bg1",
+			"seg",
+			"0",
+			"100",
+			"use",
+			"parseline",
+			"parse",
+			"adjList",
+			"nodes",
+			"edgeno",
+			"edgenode"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"new_move = *(new move)",
+			".",
+			"check_jump_ret",
+			"3",
+			"2",
+			"1",
+			"len",
+			"adj_list"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "inc/NeuralNetwork.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.cc":
+	{
+		"height": 218.0
+	},
+	"output.exec":
+	{
+		"height": 174.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Makefile/Make.sublime-build",
+	"project": "NeuralNetwork.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"main.c",
+				"src/main.cpp"
+			],
+			[
+				"bo",
+				"src/board.cpp"
+			],
+			[
+				"game",
+				"src/game.cpp"
+			],
+			[
+				"cpp",
+				"src/game.cpp"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
