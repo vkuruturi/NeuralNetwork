@@ -5,11 +5,11 @@
 #include <vector>
 #include <cmath>
 #include <iomanip>
+#include <sstream>
 
 // sigmoid definitions
 #define SIGMOID(X) 1/(1+exp(-X))
-#define SIGDERIV(X) SIGMOID(X)*1-SIGMOID(X)
-
+#define SIGDERIV(X) (SIGMOID(X) * (1-SIGMOID(X)))
 
 NeuralNetwork::NeuralNetwork(std::ifstream *in){
 	load_neural_net(in);
@@ -19,100 +19,119 @@ void NeuralNetwork::load_neural_net(std::ifstream *in){
 	*in >> input_neuron_count >> hidden_neuron_count >> output_neuron_count;
 	
 	// init 2d array for input->hidden layer weights
-	std::vector<double> v(hidden_neuron_count+1,0);
-	weights_in2hid.resize(input_neuron_count + 1, v);
+	std::vector<double> v((unsigned int) input_neuron_count+1,0);
+	weights_in2hid.resize((unsigned int) hidden_neuron_count, v);
 
 	// init 2d array for hidden->output layer weights
-	v.resize(output_neuron_count+1,0);
-	weights_hid2out.resize(hidden_neuron_count+1,v);
-	
+	v.resize((unsigned int) hidden_neuron_count+1,0);
+	weights_hid2out.resize((unsigned int) output_neuron_count,v);
+    std::string line;
+    double d = 0;
+    std::getline(*in, line);
+
 	// load input->hidden layer weights
-	for (int j = 0; j <= hidden_neuron_count; ++j)
+	for (int i = 0; i < hidden_neuron_count; ++i)
 	{
-		for (int i = 0; i <= input_neuron_count; ++i)
+        std::stringstream ss;
+        std::getline(*in,line);
+        std::cout << line << std::endl;
+        ss.str(line);
+		for (int j = 0; j <= input_neuron_count; ++j)
 		{
-			*in >> weights_in2hid[i][j];
+			ss >> d;
+            weights_in2hid[i][j] = d;
 		}
 	}
 
 	
 	// load hidden->output layer weights
-	for (int j = 0; j <= output_neuron_count; ++j)
+	for (int i = 0; i < output_neuron_count; ++i)
 	{
-		for (int i = 0; i <= hidden_neuron_count; ++i)
+        std::stringstream ss;
+        std::getline(*in,line);
+        ss.str(line);
+        ss.clear();
+		for (int j = 0; j <= hidden_neuron_count; ++j)
 		{
-			*in >> weights_hid2out[i][j];
+			ss >> weights_hid2out[i][j];
 		}
 	}
 
-	input_neurons.resize(input_neuron_count+1,0);
-	hidden_neurons.resize(hidden_neuron_count+1,0);
-	output_neurons.resize(output_neuron_count+1,0);
+	input_neurons.resize((unsigned int) input_neuron_count,0);
+	hidden_neurons.resize((unsigned int) hidden_neuron_count,0);
+	output_neurons.resize((unsigned int) output_neuron_count,0);
 
-	input_neurons[0] = -1;
-	hidden_neurons[0] = -1;
+    input_activations.resize((unsigned int) input_neuron_count,0);
+    hidden_activations.resize((unsigned int) hidden_neuron_count,0);
+    output_activations.resize((unsigned int) output_neuron_count,0);
+
 }
 
 void NeuralNetwork::feed_forward(const std::vector<double> &input){
 	// error check: match input size to size of input neurons
-	if (input_neurons.size() != input.size() +1)
+	if (input_neurons.size() != input.size())
 	{
 		std::cerr << "NeuralNetwork::feed_forward: input size does not match! Input neuron count (w/o bias): "  << input_neuron_count << " input vector size: " <<input.size() << ". Exiting..." << std::endl;
 		exit(1);
 	}
-/*
+
 	// fill all neuron values with 0
 	std::fill(input_neurons.begin(),input_neurons.end(),0);
 	std::fill(hidden_neurons.begin(), hidden_neurons.end(),0);
 	std::fill(output_neurons.begin(), output_neurons.end(),0);
 
-	// set bias neurons to -1
-	input_neurons[0] = -1;
-	hidden_neurons[0] = -1;
-
 	// fill in input neurons
-	for (int i = 1; i <input_neurons.size(); ++i){
-		input_neurons[i] = input[i];
+	for (unsigned int i = 0; i <input_neurons.size(); ++i)
+	{
+		input_activations[i] = input[i];
 	}
 
-	update_activations(input_neurons,weights_in2hid,hidden_neurons);
-	update_activations(hidden_neurons,weights_hid2out,output_neurons);*/
-	return;
+	update_activations();
 }
 
-void NeuralNetwork::update_activations(std::vector<double> &previous, std::vector<std::vector<double>> &weights, std::vector<double> &next){
-	double d;
-	// do not update bias neuron of next layer, so start from j=1
-	for (int j = 1; j < next.size(); ++j)
-	{
-		d = 0;
-		for (int i = 0; i < previous.size(); ++i)
-		{
-			d += previous[i] *weights[i][j];
-		}
-		next[j] = SIGMOID(d);
-	}
+void NeuralNetwork::update_activations(){
+    for( unsigned int i = 0; i < hidden_neurons.size(); ++i)
+    {
+        hidden_neurons[i] = -1* weights_in2hid[i][0];
+        for(unsigned int j = 0; j < input_neurons.size(); ++j )
+        {
+            hidden_neurons[i] += weights_in2hid[i][j+1] * input_activations[j];
+        }
+        hidden_activations[i] = SIGMOID(hidden_neurons[i]);
+    }
+
+    for( unsigned int i = 0; i < output_neurons.size(); ++i)
+    {
+        output_neurons[i] = -1 * weights_hid2out[i][0];
+        for(unsigned int j = 0; j < hidden_neurons.size(); ++j)
+        {
+            output_neurons[i] += weights_hid2out[i][j+1]*hidden_activations[j];
+        }
+        output_activations[i] = SIGMOID(output_neurons[i]);
+    }
 }
 
 void NeuralNetwork::save_weights(std::ofstream *out){
 	*out << input_neuron_count << " " << hidden_neuron_count << " " << output_neuron_count << std::endl;
 
-	for (int j = 1; j <= hidden_neuron_count; ++j)
+	for (int i = 0; i < hidden_neuron_count; ++i)
 	{
-		*out << std::setprecision(3) << std::fixed << weights_in2hid[0][j];
-		for (int i = 0; i < input_neuron_count; ++i)
+		for (int j = 0; j < input_neuron_count +1; ++j)
 		{
 			*out << std::setprecision(3) << std::fixed << weights_in2hid[i][j];
-		}
+		    if ( j != input_neuron_count)
+                *out << " ";
+        }
 		*out << std::endl;
 	}
 
-	for (int j = 1; j <= output_neuron_count; ++j)
+	for (int i = 0; i < output_neuron_count; ++i)
 	{
-		*out << std::setprecision(3) << std::fixed << weights_hid2out[0][j];
-		for (int i = 0; i < hidden_neuron_count; ++i)
+		for (int j = 0; j < hidden_neuron_count + 1; ++j)
 		{
 			*out << std::setprecision(3) << std::fixed << weights_hid2out[i][j];
+            if ( j != hidden_neuron_count)
+                *out << " ";
 		}
 		*out << std::endl;
 	}

@@ -10,12 +10,9 @@ class Tester{
 private:
 	NeuralNetwork *net;
 
-	std::vector<std::vector<double>> metrics;
-	double macro_metrics[4], micro_metrics[4];
-
-	void compare_outputs(std::vector<bool>*);
-	void calculate_metrics(void);
-
+	std::vector<double> input;
+	std::vector<std::vector<bool>> expected_output;
+	std::vector<std::vector<bool>> classified;
 
 public:
 

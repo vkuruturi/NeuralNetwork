@@ -41,7 +41,8 @@ void train(void)
 	std::ofstream outfile;
 	std::cout << "Specify input file to load the initial neural network from: ";
 	//std::cin >> s;
-	s = "test/WDBC/net_init.txt";
+
+	s = "../test/WDBC_debug/net_init.txt";
 	net_file.open(s.c_str());
     
     while (!net_file.good())
@@ -54,7 +55,7 @@ void train(void)
 
 	std::cout << "Enter the number of epochs training should go on for: ";
 	//std::cin >> i;
-	i = 100;
+	i = 1;
 	t.set_epochs(i);
 	std::cout << "Enter the learning rate: ";
 	//std::cin >> d;
@@ -63,7 +64,7 @@ void train(void)
 
 	std::cout << "Specify the input file for training the neural network: ";
 	//std::cin >> s;
-	s = "test/WDBC/train.txt";
+    s = "../test/WDBC_debug/train.txt";
 	training_file.open(s.c_str());
     
     while (!training_file.good())
@@ -79,7 +80,7 @@ void train(void)
     training_file >> i;
     t.set_inputs(i);
     training_file >> i;
-    t.set_inputs(i);
+    t.set_outputs(i);
 
     t.back_prop_learn(&training_file);
 
@@ -104,6 +105,51 @@ void train(void)
 
 void test()
 {
+    std::string s;
+    std::ifstream net_file, test_file;
+    std::ofstream outfile;
+    std::cout << "Specify input file to load the initial neural network from: ";
+    //std::cin >> s;
+
+    s = "test/WDBC/net_trained.txt";
+    net_file.open(s.c_str());
+
+    while (!net_file.good())
+    {
+        std::cout << "Unable to open file! Try again: ";
+        std::cin >> s;
+        net_file.open(s.c_str());
+    }
+    Tester t(&net_file);
+
+    std:: cout << "Specify input file to load the test data from: ";
+    //std::cin >> s;
+    s = "test/WDBC/test.txt";
+    test_file.open(s.c_str());
+
+    while(!test_file.good())
+    {
+        std::cout << "Unable to open file! Try again: ";
+        std::cin >> s;
+        test_file.open(s.c_str());
+    }
+
+    std::cout << "Starting test..." << std::endl;
+    t.test_network(&test_file);
+    std::cout << "Test finished!" << std::endl;
+
+    std::cout << "Specify output file to write results to: ";
+    // std::cin >> s;
+    s = "results.txt";
+    outfile.open(s.c_str());
+    while(!outfile.good())
+    {
+        std::cout << "Unable to open file! Try again: ";
+        std::cin >> s;
+        outfile.open(s.c_str());
+    }
+    t.output_metrics(&outfile);
+    std::cout << "Testing completed." << std::endl;
 
 }
 

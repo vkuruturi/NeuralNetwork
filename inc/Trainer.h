@@ -18,7 +18,7 @@ private:
 
 	double learning_rate;
 
-	void back_prop(std::vector<double>*);
+	void back_prop(std::vector<bool>*);
 
 
 public:

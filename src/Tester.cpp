@@ -8,35 +8,39 @@
 #include <string>
 #include <iomanip>
 
-#define ROUND(x) ( (x >= 0.5) ? true : false )
 
 Tester::Tester(std::ifstream *in)
 {
 	net = new NeuralNetwork(in);
-	for(int i = 0; i < 4; i++)
-	{
-		macro_metrics[i] = 0;
-		micro_metrics[i] = 0;
-	}
 }
 
 void Tester::test_network(std::ifstream *in)
 {
 	std::string line;
-	std::vector<double> input;
-	std::vector<bool> expected_output;
-	*in >> line;
 
+	std::stringstream ss;
 	std::vector<std::string> data;
+	int samples, inputs, outputs;
+	samples = inputs = outputs = 0;
+
+	std::getline(*in, line);
+	ss.str(line);
+	ss >> samples >> inputs >> outputs;
+
+	std::vector<bool> v(outputs);
+	classified.resize(samples,v);
+	expected_output.resize(samples, v);
+
 	while(std::getline(*in,line))
 		data.push_back(line);
 
-	for(std::vector<std::string>::const_iterator it = data.begin(); it != data.end(); it++)
+
+	for( int i = 0; i < data.size(); ++i)
 	{
 		input.clear();
-		expected_output.clear();
-		std::stringstream ss(line);
-		double d;
+		std::stringstream ss(data[i]);
+		std::cout << data[i] << std::endl;
+		double d = 0;
 		int count = 0;
 
 		while( ss >> d)
@@ -48,107 +52,74 @@ void Tester::test_network(std::ifstream *in)
 			}
 			else
 			{
-				expected_output.push_back(d);
+				expected_output[i].push_back((bool) d);
 				count++;
 			}
 		}
-
+		std::cout << i << std::endl;
 		net->feed_forward(input);
-		compare_outputs(&expected_output);
+		for(int j = 0; j < outputs; ++j)
+		{
+			classified[i][j] = (net->output_activations[j] >= 0.5 ? true : false);
+		}
 	}
-	calculate_metrics();
 }
 
-void Tester::compare_outputs(std::vector<bool> *expected_output)
+
+void Tester::output_metrics(std::ofstream * outfile)
 {
-	std::vector<double>::iterator neuron_it = (net->output_neurons.begin())++;
-	std::vector<bool>::iterator expected_it = expected_output->begin();
-	std::vector<std::vector<double>>::iterator metric_it = metrics.begin();
-	for(; neuron_it != net->output_neurons.end(); neuron_it++, expected_it++, metric_it++)
+	double total_A,total_B,total_C,total_D;
+
+	double micro_accuracy = 0, micro_precision = 0, micro_recall = 0, micro_F1 = 0;
+	double macro_accruacy = 0, macro_precision = 0, macro_recall = 0, macro_F1 = 0;
+
+	for( int i = 0; i < net->output_neuron_count; ++i)
 	{
-		if (ROUND(*neuron_it))
+		double A,B,C,D;
+		A = B = C = D = 0;
+
+		for(int j = 0; j < classified.size(); j++)
 		{
-			if(*expected_it)
-				((*metric_it)[0])++;
-			else ((*metric_it)[1])++;
+			if(expected_output[j][i] && classified[j][i])
+				A++;
+			if(!expected_output[j][i] && classified[j][i])
+				B++;
+			if(expected_output[j][i] && !classified[j][i])
+				C++;
+			if(!expected_output[j][i] && !classified[j][i])
+				D++;
+
 		}
-		else
-		{
-			if(*expected_it)
-				((*metric_it)[2])++;
-			else ((*metric_it)[3])++;
-		}
+
+		double accuracy = (A + D) / (A + B + C + D);
+		double precision = A / (A+B);
+		double recall = A / (A+C);
+		double f1 = (2* precision*recall) / (precision + recall);
+
+		*outfile << std::setprecision(0) << std::fixed << A << " " << B << " " << C << " " << D
+				 << " " << std::setprecision(3) << std::fixed << accuracy << " "
+				 << precision << " " << recall << " " << f1 << std::endl;
+
+		total_A += A;
+		total_B += B;
+		total_C += C;
+		total_D += D;
+
+		macro_accruacy 	+= accuracy/net->output_neuron_count;
+		macro_precision += precision/net->output_neuron_count;
+		macro_recall 	+= recall/net->output_neuron_count;
+		macro_F1		+= f1/net->output_neuron_count;
 	}
+
+	micro_accuracy	= (total_A + total_D) / (total_A + total_B + total_C + total_D);
+	micro_precision = total_A / (total_A + total_B);
+	micro_recall	= total_A / (total_A + total_C);
+	micro_F1		= (2 * micro_precision * micro_recall) / (micro_precision + micro_recall);
+
+	macro_F1 		= (2 * macro_precision * macro_recall) / (macro_precision + macro_recall);
+
+	*outfile << std::setprecision(3) << std::fixed << micro_accuracy << " " << micro_precision << " " << micro_recall << " " << micro_F1 << std::endl;
+	*outfile << std::setprecision(3) << std::fixed << macro_accruacy << " " << macro_precision << " " << macro_recall << " " << macro_F1 << std::endl;
 }
 
-void Tester::calculate_metrics()
-{
 
-	for(std::vector<std::vector<double>>::iterator it = metrics.begin(); it != metrics.end(); it++)
-	{
-		// overall accuracy for the category
-		(*it)[4] = ((*it)[0] + (*it)[3]) / ((*it)[0] + (*it)[1] + (*it)[2] + (*it)[3]);
-
-		// precision
-		(*it)[5] = ((*it)[0]) / ((*it)[0] + (*it)[1]);
-
-		// recall
-		(*it)[6] = ((*it)[0]) / ((*it)[0] + (*it)[2]);
-
-		//F1
-		(*it)[7] = (2 * (*it)[6] * (*it)[5]) / ((*it)[5] + (*it)[6]);
-
-		for (int i = 0; i < 4; i++)
-		{
-			micro_metrics[i] += (*it)[i];
-			macro_metrics[i] += (*it)[i+4];
-		}
-	}
-
-	double accuracy, precision, recall;
-
-	accuracy  = (micro_metrics[0] + micro_metrics[3]) / (micro_metrics[0] + micro_metrics[1] + micro_metrics[2] + micro_metrics[3]);
-	precision = micro_metrics[0] / (micro_metrics[0] + micro_metrics[1]);
-	recall    = micro_metrics[0] / (micro_metrics[0] + micro_metrics[2]);
-	micro_metrics[3] = (2 * micro_metrics[1] * micro_metrics[2]) / (micro_metrics[1] + micro_metrics[2]);
-
-	for(int i = 0; i < 4; i++)
-		macro_metrics[i] /= net->output_neuron_count;
-
-	macro_metrics[3] = (2 * macro_metrics[1] * macro_metrics[2]) / (macro_metrics[1] + macro_metrics[2]);
-}
-
-void Tester::output_metrics(std::ofstream * metrics_file)
-{
-
-	for( auto it = metrics.begin(); it != metrics.end(); it++)
-	{
-		for ( int i = 0; i < it->size(); i++)
-		{
-			if ( i < (*it).size() / 2)
-				*metrics_file << std::setprecision(0) << std::fixed << (*it)[i];
-			else
-				*metrics_file << std::setprecision(3) << std::fixed << (*it)[i];
-			if ( i < it->size())
-				*metrics_file << " ";
-			else 
-				*metrics_file << std::endl;
-		}
-	}
-
-	for(int i = 0; i < 4; i++)
-	{
-		*metrics_file << micro_metrics[i];
-		if ( i < 3)
-			*metrics_file << " ";
-		else *metrics_file << std::endl;
-	}
-
-	for(int i = 0; i < 4; i++)
-	{
-		*metrics_file << macro_metrics[i];
-		if ( i < 3)
-			*metrics_file << " ";
-		else *metrics_file << std::endl;
-	}
-}

@@ -4,10 +4,14 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
+#include <cmath>
+
+#define SIGMOID(x)  (1/(1+exp(-x)))
+#define SIGDERIV(x) (SIGMOID(x) * (1-SIGMOID(x)))
 
 	std::vector<std::string> v;
 	std::vector<double> input_values;
-	std::vector<double> output_values;
+	std::vector<bool> output_values;
 
 void Trainer::import_neural_net(std::ifstream *in)
 {
@@ -23,33 +27,23 @@ void Trainer::export_neural_net(std::ofstream *out)
 
 void Trainer::back_prop_learn(std::ifstream *training_file)
 {
+    std::cout << "Learning rate: " << learning_rate << " epochs: " << epochs << std::endl;
 	int current_epochs = 0;
 	std::string s;
 
-	int i = 0;
-	std::cout << "initial size: " << v.size();
+	getline(*training_file,s);
     while(getline(*training_file,s))
     {
         v.push_back(s);
-        //std::cout << v[i] << std::endl;
-        i++;
     }
 
-    for(int i = 0; i < v.size(); i++)
-    {
-    //	std::cout << v[i] << std::endl;
-    }
-epochs=1;
-	std::cout << "example count: " << v.size() << std::endl;
-	while (current_epochs < epochs)
+    while (current_epochs < epochs)
 	{
 		for(int i = 0; i < v.size(); i++)
 		{
-			std::cout << v[i] << std::endl;
 			int count = 0;
 			std::stringstream ss(v[i]);
 			double d;
-			std::cout << "COUNT: " << count << std::endl;
 			while (ss >> d)
 			{
 				if (count < inputs)
@@ -62,36 +56,53 @@ epochs=1;
 					count++;
 				}
 			}
-			std::cout << input_values.size() << std::endl;
 			net->feed_forward(input_values);
-			//back_prop(&output_values); 
+			back_prop(&output_values); 
+
+			input_values.clear();
+			output_values.clear();
+
 		}
 		current_epochs++;
 	}
 }
 
-void Trainer::back_prop(std::vector<double> *out)
+void Trainer::back_prop(std::vector<bool> *out)
 {
-	std::vector<double> delta_hidden(net->hidden_neuron_count,0);
-	std::vector<double> delta_output(net->output_neuron_count,0);
+	std::vector<double> delta_hidden((unsigned int) net->hidden_neuron_count,0);
+	std::vector<double> delta_output((unsigned int) net->output_neuron_count,0);
 
-	for(int i = 1; i <= net->output_neuron_count; i++)
-		delta_output[i] = (net->output_neurons[i]) * (1-net->output_neurons[i]) * ((*out)[i-1] - (net->output_neurons)[i]);
+	for(int i = 0; i < net->output_neuron_count; ++i)
+		delta_output[i] = SIGDERIV(net->output_neurons[i]) * ((*out)[i] - net->output_activations[i]);
 
-	for(int i = 0; i <= net->hidden_neuron_count; i++){
-		double weight_delta = 0;
-		for(int j = 1; j <= net->output_neuron_count; j++){
-			weight_delta += (net->weights_hid2out[i][j] * delta_output[j]);
+	for(int i = 0; i < net->hidden_neuron_count; ++i)
+    {
+		for(int j = 0; j < net->output_neuron_count; ++j)
+        {
+			delta_hidden[i] += (net->weights_hid2out[j][i+1] * delta_output[j]);
 		}
 
-		delta_hidden[i] = (net->hidden_neurons[i]) * (1 - net->hidden_neurons[i] * weight_delta);
+		delta_hidden[i] = SIGDERIV(net->hidden_neurons[i]);
 	}
 
-	for(int i = 0; i <= net->hidden_neuron_count; i++)
-		for(int j = 0; j <= net->output_neuron_count; j++)
-			net->weights_hid2out[i][j] = net->weights_hid2out[i][j] + learning_rate * net->hidden_neurons[i] * delta_output[j];
+	for(int i = 0; i < net->output_neuron_count; ++i)
+    {
+        for (int j = 0; j < net->hidden_neuron_count; ++j)
+        {
+            net->weights_hid2out[i][j + 1] =
+                    net->weights_hid2out[i][j + 1] + (learning_rate * net->hidden_activations[j] * delta_output[i]);
+        }
+        net->weights_hid2out[i][0] = net->weights_hid2out[i][0] + learning_rate * -1 * delta_output[i];
+    }
 
-	for(int i = 0; i <= net->input_neuron_count; i++)
-		for(int j = 0; j <= net->hidden_neuron_count; j++)
-			net->weights_in2hid[i][j] = net->weights_in2hid[i][j] + learning_rate * net->input_neurons[i] * delta_hidden[j];
+	for(int i = 0; i < net->hidden_neuron_count; ++i)
+    {
+        for (int j = 0; j < net->input_neuron_count; ++j)
+        {
+            //std::cout << i << " " << j << std::endl;
+            net->weights_in2hid[i][j + 1] =
+                    net->weights_in2hid[i][j + 1] + (learning_rate * net->input_activations[j] * delta_hidden[i]);
+        }
+        net->weights_in2hid[i][0] = net->weights_in2hid[i][0] + learning_rate * -1 * delta_hidden[i];
+    }
 }

@@ -12,7 +12,7 @@ private:
 
 	int input_neuron_count, hidden_neuron_count, output_neuron_count;
 
-	std::vector<double>  input_neurons, hidden_neurons, output_neurons;
+	std::vector<double>  input_neurons, hidden_neurons, output_neurons, input_activations,hidden_activations, output_activations;
 	std::vector<std::vector<double>>  weights_in2hid, weights_hid2out;
 
 	void load_neural_net(std::ifstream*);
@@ -21,7 +21,7 @@ private:
 
 	void save_weights(std::ofstream*);
 
-	void update_activations(std::vector<double>&, std::vector<std::vector<double>>&, std::vector<double>&);
+	void update_activations();
 	friend class Trainer;
 	friend class Tester;
 
