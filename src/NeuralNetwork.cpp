@@ -34,7 +34,7 @@ void NeuralNetwork::load_neural_net(std::ifstream *in){
 	{
         std::stringstream ss;
         std::getline(*in,line);
-        std::cout << line << std::endl;
+        //std::cout << line << std::endl;
         ss.str(line);
 		for (int j = 0; j <= input_neuron_count; ++j)
 		{

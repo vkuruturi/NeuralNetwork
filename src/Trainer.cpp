@@ -41,7 +41,7 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 
     while (current_epochs < epochs)
 	{
-		for(int i = 0; i < v.size(); i++)
+		for(unsigned int i = 0; i < v.size(); i++)
 		{
 			int count = 0;
 			std::stringstream ss(v[i]);
@@ -74,37 +74,41 @@ void Trainer::back_prop(std::vector<bool> *out)
 	std::vector<double> delta_hidden((unsigned int) net->hidden_neuron_count,0);
 	std::vector<double> delta_output((unsigned int) net->output_neuron_count,0);
 
-	for(int i = 0; i < net->output_neuron_count; ++i)
-		delta_output[i] = SIGDERIV(net->output_neurons[i]) * ((*out)[i] - net->output_activations[i]);
+
+    for(int j = 0; j < net->output_neuron_count; ++j)
+    {
+        double sum = -1 * net->weights_hid2out[j][0];
+        for(int i = 0; i < net->hidden_neuron_count; ++i)
+        {
+            sum += (net->hidden_activations[i] * net->weights_hid2out[j][i+1]);
+        }
+        delta_output[j] = SIGDERIV(sum)*((*out)[j] - SIGMOID(sum));
+    }
 
 	for(int i = 0; i < net->hidden_neuron_count; ++i)
     {
+        double sum = 0;
 		for(int j = 0; j < net->output_neuron_count; ++j)
         {
-			delta_hidden[i] += (net->weights_hid2out[j][i+1] * delta_output[j]);
+			sum += (net->weights_hid2out[j][i+1] * delta_output[j]);
 		}
 
-		delta_hidden[i] *= SIGDERIV(net->hidden_neurons[i]);
+		delta_hidden[i] = SIGDERIV(net->hidden_neurons[i]) * sum;
+
+        net->weights_in2hid[i][0] += learning_rate * -1 * delta_hidden[i];
+        for(int j = 0; j < net->input_neuron_count; ++j)
+        {
+            net->weights_in2hid[i][j+1] += learning_rate * net->input_activations[j] * delta_hidden[i];
+        }
 	}
 
-	for(int i = 0; i < net->output_neuron_count; ++i)
+    for(int j = 0; j < net->output_neuron_count; ++j)
     {
-        for (int j = 0; j < net->hidden_neuron_count; ++j)
+        net->weights_hid2out[j][0] += -1* learning_rate * delta_output[j];
+        for(int i = 0; i < net->hidden_neuron_count; ++i)
         {
-            net->weights_hid2out[i][j + 1] =
-                    net->weights_hid2out[i][j + 1] + (learning_rate * net->hidden_activations[j] * delta_output[i]);
+            net->weights_hid2out[j][i+1] += learning_rate * net->hidden_activations[i] * delta_output[j];
         }
-        net->weights_hid2out[i][0] = net->weights_hid2out[i][0] + learning_rate * -1 * delta_output[i];
     }
 
-	for(int i = 0; i < net->hidden_neuron_count; ++i)
-    {
-        for (int j = 0; j < net->input_neuron_count; ++j)
-        {
-            //std::cout << i << " " << j << std::endl;
-            net->weights_in2hid[i][j + 1] =
-                    net->weights_in2hid[i][j + 1] + (learning_rate * net->input_activations[j] * delta_hidden[i]);
-        }
-        net->weights_in2hid[i][0] = net->weights_in2hid[i][0] + learning_rate * -1 * delta_hidden[i];
-    }
 }

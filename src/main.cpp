@@ -40,9 +40,9 @@ void train(void)
 	std::ifstream net_file, training_file;
 	std::ofstream outfile;
 	std::cout << "Specify input file to load the initial neural network from: ";
-	//std::cin >> s;
+	std::cin >> s;
 
-	s = "../test/grades/net_init.txt";
+	//s = "../test/grades/net_init.txt";
 	net_file.open(s.c_str());
     
     while (!net_file.good())
@@ -54,17 +54,17 @@ void train(void)
     t.import_neural_net(&net_file);
 
 	std::cout << "Enter the number of epochs training should go on for: ";
-	//std::cin >> i;
-	i = 100;
+	std::cin >> i;
+	//i = 100;
 	t.set_epochs(i);
 	std::cout << "Enter the learning rate: ";
-	//std::cin >> d;
-	d = 0.5;
+	std::cin >> d;
+	//d = 0.05;
 	t.set_learning_rate(d);
 
 	std::cout << "Specify the input file for training the neural network: ";
-	//std::cin >> s;
-    s = "../test/grades/train.txt";
+	std::cin >> s;
+    //s = "../test/grades/train.txt";
 	training_file.open(s.c_str());
     
     while (!training_file.good())
@@ -87,8 +87,8 @@ void train(void)
     std::cout << "Finished training!" << std::endl << std::endl;
 
     std::cout << "Enter output file name to save the neural network into: ";
-    //std::cin >> s;
-    s = "net_output.txt";
+    std::cin >> s;
+    //s = "net_output.txt";
     outfile.open(s.c_str());
     while(!outfile.good())
     {
@@ -108,10 +108,10 @@ void test()
     std::string s;
     std::ifstream net_file, test_file;
     std::ofstream outfile;
-    std::cout << "Specify input file to load the initial neural network from: ";
-    //std::cin >> s;
+    std::cout << "Specify input file to load the trained neural network from: ";
+    std::cin >> s;
 
-    s = "../test/grades/net_trained.txt";
+    //s = "../test/grades/net_trained.txt";
     net_file.open(s.c_str());
 
     while (!net_file.good())
@@ -123,8 +123,8 @@ void test()
     Tester t(&net_file);
 
     std:: cout << "Specify input file to load the test data from: ";
-    //std::cin >> s;
-    s = "../test/grades/test.txt";
+    std::cin >> s;
+    //s = "../test/grades/test.txt";
     test_file.open(s.c_str());
 
     while(!test_file.good())
@@ -133,14 +133,15 @@ void test()
         std::cin >> s;
         test_file.open(s.c_str());
     }
-
+    std::cout << std::endl;
     std::cout << "Starting test..." << std::endl;
     t.test_network(&test_file);
     std::cout << "Test finished!" << std::endl;
+    std::cout << std::endl;
 
     std::cout << "Specify output file to write results to: ";
-    // std::cin >> s;
-    s = "results.txt";
+    std::cin >> s;
+    //s = "results.txt";
     outfile.open(s.c_str());
     while(!outfile.good())
     {

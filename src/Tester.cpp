@@ -30,17 +30,17 @@ void Tester::test_network(std::ifstream *in)
 	std::vector<bool> v(outputs);
 	classified.resize(samples,v);
 	expected_output.resize(samples, v);
-    std::cout << "expected output size: " << expected_output.size() << " " << expected_output[0].size() << std::endl;
+    //std::cout << "expected output size: " << expected_output.size() << " " << expected_output[0].size() << std::endl;
 
 	while(std::getline(*in,line))
 		data.push_back(line);
 
 
-	for( int i = 0; i < data.size(); ++i)
+	for( unsigned int i = 0; i < data.size(); ++i)
 	{
 		input.clear();
 		std::stringstream ss(data[i]);
-		std::cout << data[i] << std::endl;
+		//std::cout << data[i] << std::endl;
 		double d = 0;
 		int count = 0;
 
@@ -57,7 +57,7 @@ void Tester::test_network(std::ifstream *in)
 				count++;
 			}
 		}
-		std::cout << i << std::endl;
+		//std::cout << i << std::endl;
 		net->feed_forward(input);
 		for(int j = 0; j < outputs; ++j)
 		{
@@ -79,7 +79,7 @@ void Tester::output_metrics(std::ofstream * outfile)
 		double A,B,C,D;
 		A = B = C = D = 0;
 
-		for(int j = 0; j < classified.size(); j++)
+		for(unsigned int j = 0; j < classified.size(); j++)
 		{
 			if(expected_output[j][i] && classified[j][i])
 				A++;
@@ -111,7 +111,7 @@ void Tester::output_metrics(std::ofstream * outfile)
 		macro_recall 	+= recall/net->output_neuron_count;
 		macro_F1		+= f1/net->output_neuron_count;
 	}
-    std::cout << total_A << " " << total_B << " " << total_C << " " << total_D << std::endl;
+    //std::cout << total_A << " " << total_B << " " << total_C << " " << total_D << std::endl;
 	micro_accuracy	= (total_A + total_D) / (total_A + total_B + total_C + total_D);
 	micro_precision = total_A / (total_A + total_B);
 	micro_recall	= total_A / (total_A + total_C);
