@@ -9,9 +9,6 @@
 #define SIGMOID(x)  (1/(1+exp(-x)))
 #define SIGDERIV(x) (SIGMOID(x) * (1-SIGMOID(x)))
 
-	std::vector<std::string> v;
-	std::vector<double> input_values;
-	std::vector<bool> output_values;
 
 void Trainer::import_neural_net(std::ifstream *in)
 {
@@ -28,7 +25,12 @@ void Trainer::export_neural_net(std::ofstream *out)
 void Trainer::back_prop_learn(std::ifstream *training_file)
 {
     std::cout << "Learning rate: " << learning_rate << " epochs: " << epochs << std::endl;
-	int current_epochs = 0;
+
+    std::vector<std::string> v;
+    std::vector<double> input_values;
+    std::vector<bool> output_values;
+
+    int current_epochs = 0;
 	std::string s;
 
 	getline(*training_file,s);
@@ -52,7 +54,7 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 					count++;
 				} else
 				{
-					output_values.push_back(d);
+					output_values.push_back((bool) d);
 					count++;
 				}
 			}
@@ -82,7 +84,7 @@ void Trainer::back_prop(std::vector<bool> *out)
 			delta_hidden[i] += (net->weights_hid2out[j][i+1] * delta_output[j]);
 		}
 
-		delta_hidden[i] = SIGDERIV(net->hidden_neurons[i]);
+		delta_hidden[i] *= SIGDERIV(net->hidden_neurons[i]);
 	}
 
 	for(int i = 0; i < net->output_neuron_count; ++i)

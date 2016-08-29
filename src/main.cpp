@@ -42,7 +42,7 @@ void train(void)
 	std::cout << "Specify input file to load the initial neural network from: ";
 	//std::cin >> s;
 
-	s = "../test/WDBC_debug/net_init.txt";
+	s = "../test/grades/net_init.txt";
 	net_file.open(s.c_str());
     
     while (!net_file.good())
@@ -55,16 +55,16 @@ void train(void)
 
 	std::cout << "Enter the number of epochs training should go on for: ";
 	//std::cin >> i;
-	i = 1;
+	i = 100;
 	t.set_epochs(i);
 	std::cout << "Enter the learning rate: ";
 	//std::cin >> d;
-	d = 0.1;
+	d = 0.5;
 	t.set_learning_rate(d);
 
 	std::cout << "Specify the input file for training the neural network: ";
 	//std::cin >> s;
-    s = "../test/WDBC_debug/train.txt";
+    s = "../test/grades/train.txt";
 	training_file.open(s.c_str());
     
     while (!training_file.good())
@@ -111,7 +111,7 @@ void test()
     std::cout << "Specify input file to load the initial neural network from: ";
     //std::cin >> s;
 
-    s = "test/WDBC/net_trained.txt";
+    s = "../test/grades/net_trained.txt";
     net_file.open(s.c_str());
 
     while (!net_file.good())
@@ -124,7 +124,7 @@ void test()
 
     std:: cout << "Specify input file to load the test data from: ";
     //std::cin >> s;
-    s = "test/WDBC/test.txt";
+    s = "../test/grades/test.txt";
     test_file.open(s.c_str());
 
     while(!test_file.good())
