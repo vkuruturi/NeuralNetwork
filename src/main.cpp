@@ -175,4 +175,6 @@ int main(int argc, char** argv)
 			std::cout << "Invalid input!  Try again" << std::endl;
 	}
 
+    return 0;
+
 }

@@ -15,6 +15,7 @@ NeuralNetwork::NeuralNetwork(std::ifstream *in){
 	load_neural_net(in);
 }
 
+// load neural net from filestream
 void NeuralNetwork::load_neural_net(std::ifstream *in){
 	*in >> input_neuron_count >> hidden_neuron_count >> output_neuron_count;
 	
@@ -57,6 +58,7 @@ void NeuralNetwork::load_neural_net(std::ifstream *in){
 		}
 	}
 
+	// resize neuron and activation vectors
 	input_neurons.resize((unsigned int) input_neuron_count,0);
 	hidden_neurons.resize((unsigned int) hidden_neuron_count,0);
 	output_neurons.resize((unsigned int) output_neuron_count,0);
@@ -111,6 +113,7 @@ void NeuralNetwork::update_activations(){
     }
 }
 
+// write weights of neural net into filestream
 void NeuralNetwork::save_weights(std::ofstream *out){
 	*out << input_neuron_count << " " << hidden_neuron_count << " " << output_neuron_count << std::endl;
 

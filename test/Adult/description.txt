@@ -1,0 +1,103 @@
+1. Title: Adult Data Set 
+	Obtained from UC Irvine Machine Learning repsoitory
+
+2. Source Information
+
+a) Creators: 
+
+	Barry Becker
+	Data Mining and Visualization
+	Silicon Graphics
+
+b) Donor: Ronny Kohavi and Barry Becker
+
+c) Date: May 1996
+
+3. Past Usage:
+
+first usage:
+
+Ron Kohavi, "Scaling Up the Accuracy of Naive-Bayes Classifiers: a Decision-Tree Hybrid", Proceedings of the Second International Conference on Knowledge Discovery and Data Mining, 1996 
+
+
+See also:
+	Obtained from UC Irvine's Machine learning repository: https://archive.ics.uci.edu/ml/datasets/Adult
+
+4. Number of attributes: 12 (11 input, 1 output)
+
+
+5. Relevant information
+Listing of attributes:
+Note: to see text to fraction mapping, look at the excel files in test/Adult/raw.
+		Some fields also had unkowns. These were also the unknowns were also mapped. 
+
+output:
+	>50K, <=50K. (mapped to 1 and 0) 
+
+inputs:
+	age (normalized by dividing by 100, max in data is 90): continuous. 
+
+	workclass (mapped to factions between 0 and 1): Private, Self-emp-not-inc, Self-emp-inc, Federal-gov, Local-gov, State-gov, Without-pay, Never-worked.
+
+	fnlwgt (normalized by dividing by 2,000,000, max in data is 1,484,705): continuous. (See below for more information on this category)
+
+	education (mapped to factions between 0 and 1): Bachelors, Some-college, 11th, HS-grad, Prof-school, Assoc-acdm, Assoc-voc, 9th, 7th-8th, 12th, Masters, 1st-4th, 10th, Doctorate, 5th-6th, Preschool. 
+	education-num: continuous.
+
+	marital-status (mapped to factions between 0 and 1): Married-civ-spouse, Divorced, Never-married, Separated, Widowed, Married-spouse-absent, Married-AF-spouse. 
+
+	occupation (mapped to factions between 0 and 1): Tech-support, Craft-repair, Other-service, Sales, Exec-managerial, Prof-specialty, Handlers-cleaners, Machine-op-inspct, Adm-clerical, Farming-fishing, Transport-moving, Priv-house-serv, Protective-serv, Armed-Forces. 
+
+	relationship (mapped to factions between 0 and 1): Wife, Own-child, Husband, Not-in-family, Other-relative, Unmarried. 
+
+	race (mapped to factions between 0 and 1): White, Asian-Pac-Islander, Amer-Indian-Eskimo, Other, Black. 
+
+	sex (mapped to 0 and 1): Female, Male. 
+
+	hours-per-week (normalized by dividing by 24*7): continuous. 
+
+	native-country (mapped to factions between 0 and 1): United-States, Cambodia, England, Puerto-Rico, Canada, Germany, Outlying-US(Guam-USVI-etc), India, Japan, Greece, South, China, Cuba, Iran, Honduras, Philippines, Italy, Poland, Jamaica, Vietnam, Mexico, Portugal, Ireland, France, Dominican-Republic, Laos, Ecuador, Taiwan, Haiti, Columbia, Hungary, Guatemala, Nicaragua, Scotland, Thailand, Yugoslavia, El-Salvador, Trinadad&Tobago, Peru, Hong, Holand-Netherlands.
+
+excuded inputs:
+	education-num - unsure what this means
+	capital-gain
+	capital-loss
+
+Description of fnlwgt:
+	| Description of fnlwgt (final weight)
+	|
+	| The weights on the CPS files are controlled to independent estimates of the
+	| civilian noninstitutional population of the US.  These are prepared monthly
+	| for us by Population Division here at the Census Bureau.  We use 3 sets of
+	| controls.
+	|  These are:
+	|          1.  A single cell estimate of the population 16+ for each state.
+	|          2.  Controls for Hispanic Origin by age and sex.
+	|          3.  Controls by Race, age and sex.
+	|
+	| We use all three sets of controls in our weighting program and "rake" through
+	| them 6 times so that by the end we come back to all the controls we used.
+	|
+	| The term estimate refers to population totals derived from CPS by creating
+	| "weighted tallies" of any specified socio-economic characteristics of the
+	| population.
+	|
+	| People with similar demographic characteristics should have
+	| similar weights.  There is one important caveat to remember
+	| about this statement.  That is that since the CPS sample is
+	| actually a collection of 51 state samples, each with its own
+	| probability of selection, the statement only applies within
+	| state.
+
+
+5.	Number of samples in training set:	32561
+	Number of samples in test set:		16281	
+
+6. 	Class distribution (training set): 	7841/32561 have income over 50K
+	Class distribution (test set):		3846/16281 have income over 50K
+
+7.	Results:
+	Accuracy: 81.3% with NN trained with learning rate of 0.05 over 100 epochs
+		compared to 86% achieved by Donor of dataset.
+		No improvements could be seen when changing the learning rate or increasing the number of epochs.  Decreasing the number of epochs produced worse results.
+	Data on other metrics couldn’t be found.

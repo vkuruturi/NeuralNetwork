@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <iomanip>
 
 #define SIGMOID(x)  (1/(1+exp(-x)))
 #define SIGDERIV(x) (SIGMOID(x) * (1-SIGMOID(x)))
@@ -41,6 +42,7 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 
     while (current_epochs < epochs)
 	{
+		std::cout << "\tProgress: " << current_epochs << "/" << epochs << " epochs. (" <<std::setprecision(2) << std::fixed << ( current_epochs * 100.0)/epochs << "%)" << "\r" << std::flush;
 		for(unsigned int i = 0; i < v.size(); i++)
 		{
 			int count = 0;
@@ -67,6 +69,8 @@ void Trainer::back_prop_learn(std::ifstream *training_file)
 		}
 		current_epochs++;
 	}
+
+	std::cout << std::endl;
 }
 
 void Trainer::back_prop(std::vector<bool> *out)
